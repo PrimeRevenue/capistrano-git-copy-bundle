@@ -18,7 +18,7 @@ module Capistrano
 
           if gems_changed?
             Bundler.with_clean_env do
-              execute("bundle package --gemfile #{File.join(repo_path, 'Gemfile')} --all --all-platforms")
+              execute("bundle package --gemfile #{File.join(repo_path, 'Gemfile')} --all --all-platforms --path #{fetch(:bundle_path)}")
             end
 
             File.open(cached_gemfile_md5_path, 'w') { |f| f.write(gemfile_md5) } unless gemfile_md5.nil?
